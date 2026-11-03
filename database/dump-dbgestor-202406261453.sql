@@ -29,7 +29,9 @@ CREATE TABLE `asignaciones` (
   `fecha_asignacion` date DEFAULT NULL,
   PRIMARY KEY (`id_asignacion`),
   KEY `asignaciones_usuario_FK` (`id_usuario`),
-  KEY `asignaciones_tareas_FK` (`id_tarea`)
+  KEY `asignaciones_tareas_FK` (`id_tarea`),
+  CONSTRAINT `fk_asignaciones_usuario` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id_usuario`) ON DELETE SET NULL ON UPDATE CASCADE,
+  CONSTRAINT `fk_asignaciones_tareas` FOREIGN KEY (`id_tarea`) REFERENCES `tareas` (`id_tarea`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -53,9 +55,13 @@ CREATE TABLE `comentarios` (
   `id_comentario` int(11) NOT NULL AUTO_INCREMENT,
   `texto_comentario` varchar(250) DEFAULT NULL,
   `fecha_hora` datetime DEFAULT NULL,
-  `id_usuario` varchar(100) DEFAULT NULL,
+  `id_usuario` int(11) DEFAULT NULL,
   `id_tarea` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id_comentario`)
+  PRIMARY KEY (`id_comentario`),
+  KEY `comentarios_usuario_FK` (`id_usuario`),
+  KEY `comentarios_tareas_FK` (`id_tarea`),
+  CONSTRAINT `fk_comentarios_usuario` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id_usuario`) ON DELETE SET NULL ON UPDATE CASCADE,
+  CONSTRAINT `fk_comentarios_tareas` FOREIGN KEY (`id_tarea`) REFERENCES `tareas` (`id_tarea`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=203 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -65,7 +71,7 @@ CREATE TABLE `comentarios` (
 
 LOCK TABLES `comentarios` WRITE;
 /*!40000 ALTER TABLE `comentarios` DISABLE KEYS */;
-INSERT INTO `comentarios` VALUES (201,'Subirlo YA!!!','2024-06-26 13:48:00','Perla Joceline Martínez Meza',199),(202,'hola','2024-06-26 13:49:00','Liliana Gómez Martínez',199);
+INSERT INTO `comentarios` VALUES (201,'Subirlo YA!!!','2024-06-26 13:48:00',196,199),(202,'hola','2024-06-26 13:49:00',172,199);
 /*!40000 ALTER TABLE `comentarios` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -173,7 +179,7 @@ CREATE TABLE `usuario` (
 
 LOCK TABLES `usuario` WRITE;
 /*!40000 ALTER TABLE `usuario` DISABLE KEYS */;
-INSERT INTO `usuario` VALUES (131,'Ana Paola Ramírez Vázquez','ana22533@cbtis75.edu.mx','0722','Estudiante','#70FAB7'),(172,'Liliana Gómez Martínez','liliana22512@cbtis75.edu.mx','ada','Estudiante','#54EA01'),(196,'Perla Joceline Martínez Meza','perla22522@cbtis75.edu.mx','12345','Estudiante','#805611');
+INSERT INTO `usuario` VALUES (131,'Ana Paola RamA-rez VAzquez','ana22533@cbtis75.edu.mx','$2a$10$w0D7Z5l6O1w6uY4zIeP2E.7EqJtq98hPqEX7fNZaFWoOhiM9Fv0o8','Estudiante','#70FAB7'),(172,'Liliana GA3mez MartA-nez','liliana22512@cbtis75.edu.mx','$2a$10$e8kZ1q98hPqEX7fNZaFWoOhiM9Fv0o8L2m5n6P4w6u3j9k8l7m1n2','Estudiante','#54EA01'),(196,'Perla Joceline MartA-nez Meza','perla22522@cbtis75.edu.mx','$2a$10$L9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LJZdL17lhWy','Estudiante','#805611');
 /*!40000 ALTER TABLE `usuario` ENABLE KEYS */;
 UNLOCK TABLES;
 
