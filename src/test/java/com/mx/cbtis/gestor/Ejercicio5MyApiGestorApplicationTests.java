@@ -1,16 +1,12 @@
 package com.mx.cbtis.gestor;
 
-import javax.sql.DataSource;
-
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 
-@SpringBootTest
+@SpringBootTest(properties = {
+    "spring.autoconfigure.exclude=org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration,org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration"
+})
 class Ejercicio5MyApiGestorApplicationTests {
-
-	@MockBean
-	private DataSource dataSource;
 
 	@Test
 	void contextLoads() {
